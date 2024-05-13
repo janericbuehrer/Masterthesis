@@ -1,0 +1,413 @@
+#NEXUS
+[R-package APE, Fri Jan  5 17:31:51 2024]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 200;
+	TAXLABELS
+		Gentiana_acaulis
+		Gentiana_ligustica
+		Gentiana_angustifolia
+		Gentiana_occidentalis
+		Gentiana_clusii
+		Gentiana_dinarica
+		Gentiana_angulosa
+		Gentiana_oschtenica
+		Gentiana_tergestina
+		Gentiana_krylovii
+		Gentiana_orbicularis
+		Gentiana_verna
+		Gentiana_bavarica
+		Gentiana_brentae
+		Gentiana_brachyphylla
+		Gentiana_schleicheri
+		Gentiana_rostanii
+		Gentiana_penetii
+		Gentiana_terglouensis
+		Gentiana_nivalis
+		Gentiana_pumila
+		Gentiana_utriculosa
+		Gentiana_asclepiadea
+		Gentiana_burseri
+		Gentiana_lutea
+		Gentiana_punctata
+		Gentiana_purpurea
+		Gentiana_pannonica
+		Gentiana_froelichii
+		Gentiana_albomarginata
+		Gentiana_anisostemon
+		Gentiana_linoides
+		Gentiana_maeulchanensis
+		Gentiana_papillosa
+		Gentiana_praticola
+		Gentiana_hesseliana
+		Gentiana_bella
+		Gentiana_cephalodes
+		Gentiana_wingecarribiensis
+		Gentiana_wissmannii
+		Gentiana_zollingeri
+		Gentiana_arisanensis
+		Gentiana_scabrida
+		Gentiana_itzershanensis
+		Gentiana_tarokoensis
+		Gentiana_flavomaculata
+		Gentiana_kaohsiungensis
+		Gentiana_tentyoensis
+		Gentiana_carinicostata
+		Gentiana_cinereifolia
+		Gentiana_cruttwellii
+		Gentiana_nerterifolia
+		Gentiana_ettingshausenii
+		Gentiana_macgregoryi
+		Gentiana_lycopodioides
+		Gentiana_loureiroi
+		Gentiana_aquatica
+		Gentiana_atlantica
+		Gentiana_aristata
+		Gentiana_choanantha
+		Gentiana_syringea
+		Gentiana_flexicaulis
+		Gentiana_hyalina
+		Gentiana_pseudosquarrosa
+		Gentiana_sedifolia
+		Gentiana_franchetiana
+		Gentiana_intricata
+		Gentiana_tetrasticha
+		Gentiana_karelinii
+		Gentiana_stellata
+		Gentiana_crassula
+		Gentiana_spathulifolia
+		Gentiana_nanobella
+		Gentiana_heleonastes
+		Gentiana_macrauchena
+		Gentiana_piasezkii
+		Gentiana_producta
+		Gentiana_prostrata
+		Gentiana_tatsienensis
+		Gentiana_alsinoides
+		Gentiana_asterocalyx
+		Gentiana_curviphylla
+		Gentiana_pachyphylla
+		Gentiana_baeuerlenii
+		Gentiana_bredboensis
+		Gentiana_squarrosa
+		Gentiana_yokusai
+		Gentiana_crassuloides
+		Gentiana_haynaldii
+		Gentiana_simulatrix
+		Gentiana_cuneibarba
+		Gentiana_faucipilosa
+		Gentiana_pubigera
+		Gentiana_deltoidea
+		Gentiana_epichysantha
+		Gentiana_stellulata
+		Gentiana_mairei
+		Gentiana_panthaica
+		Gentiana_forrestii
+		Gentiana_rubicunda
+		Gentiana_grata
+		Gentiana_altaica
+		Gentiana_grandiflora
+		Gentiana_pyrenaica
+		Gentiana_jamesii
+		Gentiana_boryi
+		Gentiana_douglasiana
+		Gentiana_aperta
+		Gentiana_leucomelaena
+		Gentiana_pedicellata
+		Gentiana_capitata
+		Gentiana_pedata
+		Gentiana_conduplicata
+		Gentiana_micantiformis
+		Gentiana_amplicrater
+		Gentiana_robusta
+		Gentiana_tibetica
+		Gentiana_olgae
+		Gentiana_straminea
+		Gentiana_macrophylla
+		Gentiana_officinalis
+		Gentiana_zekuensis
+		Gentiana_decumbens
+		Gentiana_dahurica
+		Gentiana_siphonantha
+		Gentiana_cruciata
+		Gentiana_walujewii
+		Gentiana_kauffmanniana
+		Gentiana_olivieri
+		Gentiana_tianschanica
+		Gentiana_crassicaulis
+		Gentiana_waltonii
+		Gentiana_lhassica
+		Gentiana_andrewsii
+		Gentiana_saponaria
+		Gentiana_latidens
+		Gentiana_austromontana
+		Gentiana_decora
+		Gentiana_puberulenta
+		Gentiana_clausa
+		Gentiana_sikokiana
+		Gentiana_bicuspidata
+		Gentiana_mirandae
+		Gentiana_salpinx
+		Gentiana_spathacea
+		Gentiana_rubricaulis
+		Gentiana_cachemirica
+		Gentiana_linearis
+		Gentiana_parryi
+		Gentiana_newberryi
+		Gentiana_paradoxa
+		Gentiana_calycosa
+		Gentiana_sceptrum
+		Gentiana_pneumonanthe
+		Gentiana_gelida
+		Gentiana_septemfida
+		Gentiana_manshurica
+		Gentiana_scabra
+		Gentiana_triflora
+		Gentiana_delavayi
+		Gentiana_depressa
+		Gentiana_lacerulata
+		Gentiana_stipitata
+		Gentiana_emodi
+		Gentiana_lineolata
+		Gentiana_praeclara
+		Gentiana_urnula
+		Gentiana_szechenyii
+		Gentiana_algida
+		Gentiana_frigida
+		Gentiana_trichotoma
+		Gentiana_atuntsiensis
+		Gentiana_handeliana
+		Gentiana_monochroa
+		Gentiana_tetraphylla
+		Gentiana_nubigena
+		Gentiana_striolata
+		Gentiana_atropurpurea
+		Gentiana_vernayi
+		Gentiana_suborbisepala
+		Gentiana_yunnanensis
+		Gentiana_tongolensis
+		Gentiana_cephalantha
+		Gentiana_rigescens
+		Gentiana_duclouxii
+		Gentiana_davidi
+		Gentiana_glauca
+		Gentiana_altorum
+		Gentiana_dolichocalyx
+		Gentiana_hexaphylla
+		Gentiana_lawrencei
+		Gentiana_futtereri
+		Gentiana_oreodoxa
+		Gentiana_sino-ornata
+		Gentiana_prolata
+		Gentiana_caelestis
+		Gentiana_ornata
+		Gentiana_arethusae
+		Gentiana_veitchiorum
+		Gentiana_phyllocalyx
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Gentiana_acaulis,
+		2	Gentiana_ligustica,
+		3	Gentiana_angustifolia,
+		4	Gentiana_occidentalis,
+		5	Gentiana_clusii,
+		6	Gentiana_dinarica,
+		7	Gentiana_angulosa,
+		8	Gentiana_oschtenica,
+		9	Gentiana_tergestina,
+		10	Gentiana_krylovii,
+		11	Gentiana_orbicularis,
+		12	Gentiana_verna,
+		13	Gentiana_bavarica,
+		14	Gentiana_brentae,
+		15	Gentiana_brachyphylla,
+		16	Gentiana_schleicheri,
+		17	Gentiana_rostanii,
+		18	Gentiana_penetii,
+		19	Gentiana_terglouensis,
+		20	Gentiana_nivalis,
+		21	Gentiana_pumila,
+		22	Gentiana_utriculosa,
+		23	Gentiana_asclepiadea,
+		24	Gentiana_burseri,
+		25	Gentiana_lutea,
+		26	Gentiana_punctata,
+		27	Gentiana_purpurea,
+		28	Gentiana_pannonica,
+		29	Gentiana_froelichii,
+		30	Gentiana_albomarginata,
+		31	Gentiana_anisostemon,
+		32	Gentiana_linoides,
+		33	Gentiana_maeulchanensis,
+		34	Gentiana_papillosa,
+		35	Gentiana_praticola,
+		36	Gentiana_hesseliana,
+		37	Gentiana_bella,
+		38	Gentiana_cephalodes,
+		39	Gentiana_wingecarribiensis,
+		40	Gentiana_wissmannii,
+		41	Gentiana_zollingeri,
+		42	Gentiana_arisanensis,
+		43	Gentiana_scabrida,
+		44	Gentiana_itzershanensis,
+		45	Gentiana_tarokoensis,
+		46	Gentiana_flavomaculata,
+		47	Gentiana_kaohsiungensis,
+		48	Gentiana_tentyoensis,
+		49	Gentiana_carinicostata,
+		50	Gentiana_cinereifolia,
+		51	Gentiana_cruttwellii,
+		52	Gentiana_nerterifolia,
+		53	Gentiana_ettingshausenii,
+		54	Gentiana_macgregoryi,
+		55	Gentiana_lycopodioides,
+		56	Gentiana_loureiroi,
+		57	Gentiana_aquatica,
+		58	Gentiana_atlantica,
+		59	Gentiana_aristata,
+		60	Gentiana_choanantha,
+		61	Gentiana_syringea,
+		62	Gentiana_flexicaulis,
+		63	Gentiana_hyalina,
+		64	Gentiana_pseudosquarrosa,
+		65	Gentiana_sedifolia,
+		66	Gentiana_franchetiana,
+		67	Gentiana_intricata,
+		68	Gentiana_tetrasticha,
+		69	Gentiana_karelinii,
+		70	Gentiana_stellata,
+		71	Gentiana_crassula,
+		72	Gentiana_spathulifolia,
+		73	Gentiana_nanobella,
+		74	Gentiana_heleonastes,
+		75	Gentiana_macrauchena,
+		76	Gentiana_piasezkii,
+		77	Gentiana_producta,
+		78	Gentiana_prostrata,
+		79	Gentiana_tatsienensis,
+		80	Gentiana_alsinoides,
+		81	Gentiana_asterocalyx,
+		82	Gentiana_curviphylla,
+		83	Gentiana_pachyphylla,
+		84	Gentiana_baeuerlenii,
+		85	Gentiana_bredboensis,
+		86	Gentiana_squarrosa,
+		87	Gentiana_yokusai,
+		88	Gentiana_crassuloides,
+		89	Gentiana_haynaldii,
+		90	Gentiana_simulatrix,
+		91	Gentiana_cuneibarba,
+		92	Gentiana_faucipilosa,
+		93	Gentiana_pubigera,
+		94	Gentiana_deltoidea,
+		95	Gentiana_epichysantha,
+		96	Gentiana_stellulata,
+		97	Gentiana_mairei,
+		98	Gentiana_panthaica,
+		99	Gentiana_forrestii,
+		100	Gentiana_rubicunda,
+		101	Gentiana_grata,
+		102	Gentiana_altaica,
+		103	Gentiana_grandiflora,
+		104	Gentiana_pyrenaica,
+		105	Gentiana_jamesii,
+		106	Gentiana_boryi,
+		107	Gentiana_douglasiana,
+		108	Gentiana_aperta,
+		109	Gentiana_leucomelaena,
+		110	Gentiana_pedicellata,
+		111	Gentiana_capitata,
+		112	Gentiana_pedata,
+		113	Gentiana_conduplicata,
+		114	Gentiana_micantiformis,
+		115	Gentiana_amplicrater,
+		116	Gentiana_robusta,
+		117	Gentiana_tibetica,
+		118	Gentiana_olgae,
+		119	Gentiana_straminea,
+		120	Gentiana_macrophylla,
+		121	Gentiana_officinalis,
+		122	Gentiana_zekuensis,
+		123	Gentiana_decumbens,
+		124	Gentiana_dahurica,
+		125	Gentiana_siphonantha,
+		126	Gentiana_cruciata,
+		127	Gentiana_walujewii,
+		128	Gentiana_kauffmanniana,
+		129	Gentiana_olivieri,
+		130	Gentiana_tianschanica,
+		131	Gentiana_crassicaulis,
+		132	Gentiana_waltonii,
+		133	Gentiana_lhassica,
+		134	Gentiana_andrewsii,
+		135	Gentiana_saponaria,
+		136	Gentiana_latidens,
+		137	Gentiana_austromontana,
+		138	Gentiana_decora,
+		139	Gentiana_puberulenta,
+		140	Gentiana_clausa,
+		141	Gentiana_sikokiana,
+		142	Gentiana_bicuspidata,
+		143	Gentiana_mirandae,
+		144	Gentiana_salpinx,
+		145	Gentiana_spathacea,
+		146	Gentiana_rubricaulis,
+		147	Gentiana_cachemirica,
+		148	Gentiana_linearis,
+		149	Gentiana_parryi,
+		150	Gentiana_newberryi,
+		151	Gentiana_paradoxa,
+		152	Gentiana_calycosa,
+		153	Gentiana_sceptrum,
+		154	Gentiana_pneumonanthe,
+		155	Gentiana_gelida,
+		156	Gentiana_septemfida,
+		157	Gentiana_manshurica,
+		158	Gentiana_scabra,
+		159	Gentiana_triflora,
+		160	Gentiana_delavayi,
+		161	Gentiana_depressa,
+		162	Gentiana_lacerulata,
+		163	Gentiana_stipitata,
+		164	Gentiana_emodi,
+		165	Gentiana_lineolata,
+		166	Gentiana_praeclara,
+		167	Gentiana_urnula,
+		168	Gentiana_szechenyii,
+		169	Gentiana_algida,
+		170	Gentiana_frigida,
+		171	Gentiana_trichotoma,
+		172	Gentiana_atuntsiensis,
+		173	Gentiana_handeliana,
+		174	Gentiana_monochroa,
+		175	Gentiana_tetraphylla,
+		176	Gentiana_nubigena,
+		177	Gentiana_striolata,
+		178	Gentiana_atropurpurea,
+		179	Gentiana_vernayi,
+		180	Gentiana_suborbisepala,
+		181	Gentiana_yunnanensis,
+		182	Gentiana_tongolensis,
+		183	Gentiana_cephalantha,
+		184	Gentiana_rigescens,
+		185	Gentiana_duclouxii,
+		186	Gentiana_davidi,
+		187	Gentiana_glauca,
+		188	Gentiana_altorum,
+		189	Gentiana_dolichocalyx,
+		190	Gentiana_hexaphylla,
+		191	Gentiana_lawrencei,
+		192	Gentiana_futtereri,
+		193	Gentiana_oreodoxa,
+		194	Gentiana_sino-ornata,
+		195	Gentiana_prolata,
+		196	Gentiana_caelestis,
+		197	Gentiana_ornata,
+		198	Gentiana_arethusae,
+		199	Gentiana_veitchiorum,
+		200	Gentiana_phyllocalyx
+	;
+	TREE * UNTITLED = [&R] ((((((1:2.058221052,2:2.058221052):0.9884224162,(3:1.351626294,4:1.351626294):1.695017174):5.129066257,(5:4.250788685,6:4.250788685):3.924921041):8.454031559,(((((((7:1.469963898,8:1.469963898):0.2776759359,9:1.747639834):0.5807047758,10:2.32834461):1.530272128,(11:1.635045517,12:1.635045517):2.223571221):1.972407297,(((13:0.6157089022,14:0.6157089022):2.516929544,(((15:0.6916299802,16:0.6916299802):1.153741088,17:1.845371068):0.3125152583,18:2.157886327):0.9747521195):0.9795299442,19:4.11216839):1.718855644):1.977585932,((20:4.320834379,21:4.320834379):1.284154854,22:5.604989233):2.203620734):5.98296724,((23:6.980588039,(24:3.805421867,((25:1.616892146,(26:0.4096944854,27:0.4096944854):1.207197661):0.9543401872,28:2.571232333):1.234189534):3.175166172):2.54144433,29:9.522032369):4.269544838):2.838164077):11.99851587,((((((((30:15.36998917,(((((((31:0.8709757068,32:0.8709757068):2.928443599,33:3.799419306):2.394990932,34:6.194410238):1.483317105,35:7.677727342):1.337991149,36:9.015718492):3.381951041,((37:1.886159098,38:1.886159098):8.762215239,((39:0.1909972672,40:0.1909972672):3.272147771,41:3.463145038):7.185229299):1.749295196):1.518650693,(((((42:2.052274918,43:2.052274918):1.090023436,(44:2.252292389,45:2.252292389):0.890005964):1.090548698,(46:2.85266958,47:2.85266958):1.380177471):0.6692990543,48:4.902146106):5.885231019,(((((49:0.9058826911,50:0.9058826911):1.022657639,(51:1.570340885,52:1.570340885):0.3581994455):0.671516042,(53:1.053357061,54:1.053357061):1.546699312):1.307494408,55:3.907550781):3.703731963,56:7.611282743):3.176094381):3.128943101):1.453668942):1.98303036,((((((((57:3.340995895,58:3.340995895):4.001532425,((59:3.388656819,(60:1.010337617,61:1.010337617):2.378319202):2.412812006,62:5.801468825):1.541059495):1.286166801,63:8.628695121):2.099065474,(64:8.932093487,65:8.932093487):1.795667108):1.350741245,(66:9.653112219,67:9.653112219):2.425389621):0.5301805944,68:12.60868243):1.163805442,(69:9.375899599,70:9.375899599):4.396588277):2.072167739,((((71:7.925748404,72:7.925748404):1.214829407,73:9.140577811):1.147053805,(74:3.887443779,75:3.887443779):6.400187837):3.177260594,(((76:7.273216748,77:7.273216748):1.630321414,78:8.903538162):2.545677995,79:11.44921616):2.015676053):2.379763405):1.508363913):1.17334534,((((((((((80:2.609516423,81:2.609516423):2.675254924,(82:2.172624885,83:2.172624885):3.112146462):0.7810369133,(((84:0.5330749219,85:0.5330749219):0.8383890673,86:1.371463989):1.572941945,87:2.944405934):3.121402326):2.224864809,(88:6.217000794,(89:2.764777284,90:2.764777284):3.452223509):2.073672276):2.050486926,(91:3.322186294,92:3.322186294):7.018973701):1.303518451,93:11.64467845):1.255085932,(((94:1.090609315,95:1.090609315):0.8082275656,96:1.898836881):4.666395763,(97:2.249056238,98:2.249056238):4.316176406):6.334531735):0.4335967645,99:13.33336114):0.3468123944,100:13.68017354):1.468392109,101:15.14856565):3.377799221):1.959102821,((((((102:1.908376139,103:1.908376139):1.794815954,104:3.703192093):2.65055629,105:6.353748384):2.877443997,(106:7.660546174,107:7.660546174):1.570646207):2.882769748,(108:0.3333406638,109:0.3333406638):11.78062146):1.609063539,110:13.72302567):6.762442022):1.638848944,(111:2.011603111,112:2.011603111):20.11271352):2.540293536,(113:4.04849571,114:4.04849571):20.61611446):1.36644786,((((((((((((115:0.1056286211,116:0.1056286211):0.1541749831,117:0.2598036042):0.2480255372,118:0.5078291414):0.2494273452,119:0.7572564866):0.5502265085,(120:0.4087723571,(121:0.08858353436,122:0.08858353436):0.3201888228):0.898710638):0.2105427932,123:1.518025788):0.1687338958,(124:0.3133793041,125:0.3133793041):1.37338038):0.3459619431,126:2.032721627):0.1537344672,127:2.186456094):0.6595343025,((128:0.5713579579,129:0.5713579579):0.5677717565,130:1.139129714):1.706860683):1.083267547,((131:1.12795519,132:1.12795519):0.8075315159,133:1.935486706):1.993771238):2.319307071,(((((((((((134:0.3589729333,135:0.3589729333):0.3809514172,136:0.7399243505):0.09364965147,137:0.833574002):0.02984668633,138:0.8634206883):0.1777343462,139:1.041155035):0.2507510682,(140:0.706265792,141:0.706265792):0.5856403108):0.9273660416,(((142:0.9928611407,143:0.9928611407):0.2266058281,144:1.219466969):0.3989109556,145:1.618377924):0.60089422):0.3655028044,146:2.584774949):0.424329538,((147:0.7468289902,148:0.7468289902):1.527489206,149:2.274318196):0.7347862907):0.8921882626,(150:1.106945946,151:1.106945946):2.794346803):0.8453834662,((((152:1.881341827,153:1.881341827):0.6699545855,154:2.551296412):0.1567913006,(155:0.3989322213,156:0.3989322213):2.309155492):0.577234444,((157:0.7172804158,158:0.7172804158):1.439588919,159:2.156869334):1.128452823):1.461354059):1.5018888):19.78249301):1.592574183,((((160:4.506112354,(((161:1.753995918,162:1.753995918):1.260845952,163:3.01484187):0.7723798767,164:3.787221747):0.718890607):0.8214694502,(165:1.732970468,166:1.732970468):3.594611336):0.5444263359,167:5.87200814):1.547321905,168:7.419330044):20.20430217):1.004624939):1.132702533,(((((((169:0.8505142358,170:0.8505142358):2.867296351,171:3.717810587):1.543430744,((((172:1.145815263,173:1.145815263):0.4549782872,174:1.60079355):2.106176557,175:3.706970107):0.7038224978,(176:2.301551486,177:2.301551486):2.109241119):0.8504487259):6.265822278,(((178:1.688644177,179:1.688644177):5.478651437,(180:3.125526515,181:3.125526515):4.0417691):1.919447662,182:9.086743276):2.440320332):1.29406391,(((183:0.5112318361,184:0.5112318361):1.101151382,185:1.612383218):1.934110935,(186:2.944418319,187:2.944418319):0.6020758342):9.274633366):2.087010205,((((188:3.342883367,((189:2.145407099,(190:1.574174448,191:1.574174448):0.5712326503):0.8844761565,(((192:1.337639349,193:1.337639349):0.6558887816,194:1.993528131):0.4308165013,195:2.424344632):0.6055386227):0.3130001119):1.01817943,(196:3.499499219,197:3.499499219):0.8615635783):1.817651952,198:6.178714749):3.373503221,199:9.55221797):5.355919753):11.93627719,200:26.84441491):2.916544774);
+END;
