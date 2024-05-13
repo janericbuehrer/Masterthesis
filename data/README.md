@@ -1,4 +1,5 @@
 ## `data`
+These are my data set. 
 This directory houses all small (< 100 MB) data sets that are a result of individual experiments and/or simulations. Depending on the type of data collected, you may want to split them up based on file type. Data larger than 
 100 MB can be stored using [Git LFS](https://git-lfs.github.com/), though I personally try to avoid saving large files under version control and have them 
 redundantly backed up elsewhere.
