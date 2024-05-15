@@ -1,0 +1,215 @@
+################################################
+######## anagenetic speciation events ##########
+################################################
+
+# assign these distributions to the shift rates 
+function_gain_in_open ~ dnLognormal(rate_mean, rate_sd)
+function_gain_in_closed ~ dnLognormal(rate_mean, rate_sd)
+
+climate_gain_in_open ~ dnLognormal(rate_mean, rate_sd)
+climate_gain_in_closed ~ dnLognormal(rate_mean, rate_sd)
+
+both_gain_in_open ~ dnLognormal(rate_mean, rate_sd)
+both_gain_in_closed ~ dnLognormal(rate_mean, rate_sd)
+
+moves.append( mvSlide(function_gain_in_open,   weight = 2) )
+moves.append( mvSlide(function_gain_in_closed, weight = 2) )
+moves.append( mvSlide(climate_gain_in_open, weight = 2) )
+moves.append( mvSlide(climate_gain_in_closed, weight = 2) )
+moves.append( mvSlide(both_gain_in_open, weight = 2) )
+moves.append( mvSlide(both_gain_in_closed, weight = 2) )
+
+# transition vectors:
+
+for (i in 1:31) {
+    for (j in 1:31) {
+        r[i][j] <- 0.0
+    }
+}
+
+# transition_rates are indexed starting at 1, therefore conversion of state number to transition_rates matrix is +1
+
+
+r[1][3] := function_gain_in_open  # "TM (c)" to "TM (c,o)"
+r[1][5] := climate_gain_in_closed  # "TM (c)" to "BS (c) TM (c)"
+r[1][9] := both_gain_in_open  # "TM (c)" to "BS (o) TM (c)"
+r[1][17] := both_gain_in_open  # "TM (c)" to "TA TM (c)"      !!!!!! 
+
+r[2][3] := function_gain_in_closed  # "TM (o)" to "TM (c,o)"
+r[2][6] := both_gain_in_closed  # "TM (o)" to "BS (c) TM (o)"
+r[2][10] := climate_gain_in_open  # "TM (o)" to "BS (o) TM (o)"
+r[2][18] := climate_gain_in_open  # "TM (o)" to "TA TM (o)"
+
+r[3][7] := climate_gain_in_closed  # "TM (c,o)" to "BS (c) TM (c,o)"
+r[3][11] := climate_gain_in_open  # "TM (c,o)" to "BS (o) TM (c,o)"
+r[3][19] := climate_gain_in_open  # "TM (c,o)" to "TA TM (c,o)"
+
+r[4][5] := climate_gain_in_closed  # "BS (c)" to "BS (c) TM (c)"
+r[4][6] := both_gain_in_open  # "BS (c)" to "BS (c) TM (o)"
+r[4][12] := function_gain_in_open  # "BS (c)" to "BS (c,o)"
+r[4][20] := both_gain_in_open  # "BS (c)" to "TA BS (c)"
+
+r[5][7] := function_gain_in_open  # "BS (c) TM (c)" to "BS (c) TM (c,o)"
+r[5][13] := function_gain_in_open  # "BS (c) TM (c)" to "BS (c,o) TM (c)"
+r[5][21] := both_gain_in_open  # "BS (c) TM (c)" to "TA BS (c) TM (c)"    !!!!! 
+
+r[6][7] := function_gain_in_closed  # "BS (c) TM (o)" to "BS (c) TM (c,o)"
+r[6][14] := function_gain_in_open  # "BS (c) TM (o)" to "BS (c,o) TM (o)"     !!!! 
+r[6][22] := climate_gain_in_open  # "BS (c) TM (o)" to "TA BS (c) TM (o)"
+
+r[7][15] := function_gain_in_open  # "BS (c) TM (c,o)" to "BS (c,o) TM (c,o)"
+r[7][23] := climate_gain_in_open  # "BS (c) TM (c,o)" to "TA BS (c) TM (c,o)"
+
+r[8][9] := both_gain_in_closed  # "BS (o)" to "BS (o) TM (c)"
+r[8][10] := climate_gain_in_open  # "BS (o)" to "BS (o) TM (o)"
+r[8][12] := function_gain_in_closed  # "BS (o)" to "BS (c,o)"
+r[8][24] := climate_gain_in_open  # "BS (o)" to "TA BS (o)"
+
+r[9][11] := function_gain_in_open  # "BS (o) TM (c)" to "BS (o) TM (c,o)"
+r[9][13] := function_gain_in_closed  # "BS (o) TM (c)" to "BS (c,o) TM (c)"
+r[9][25] := climate_gain_in_open  # "BS (o) TM (c)" to "TA BS (o) TM (c)"
+
+r[10][11] := function_gain_in_closed  # "BS (o) TM (o)" to "BS (o) TM (c,o)"
+r[10][14] := function_gain_in_closed  # "BS (o) TM (o)" to "BS (c,o) TM (o)"
+r[10][26] := climate_gain_in_open  # "BS (o) TM (o)" to "TA BS (o) TM (o)"
+
+r[11][15] := function_gain_in_closed  # "BS (o) TM (c,o)" to "BS (c,o) TM (c,o)"
+r[11][27] := climate_gain_in_open  # "BS (o) TM (c,o)" to "TA BS (o) TM (c,o)"
+
+r[12][13] := climate_gain_in_closed  # "BS (c,o)" to "BS (c,o) TM (c)"
+r[12][14] := climate_gain_in_open  # "BS (c,o)" to "BS (c,o) TM (o)"
+r[12][28] := climate_gain_in_open  # "BS (c,o)" to "TA BS (c,o)"
+
+r[13][15] := function_gain_in_open  # "BS (c,o) TM (c)" to "BS (c,o) TM (c,o)"
+r[13][29] := climate_gain_in_open  # "BS (c,o) TM (c)" to "TA BS (c,o) TM (c)"
+
+r[14][15] := function_gain_in_closed  # "BS (c,o) TM (o)" to "BS (c,o) TM (c,o)"
+r[14][30] := climate_gain_in_open  # "BS (c,o) TM (o)" to "TA BS (c,o) TM (o)"
+
+r[15][31] := climate_gain_in_open  # "BS (c,o) TM (c,o)" to "TA BS (c,o) TM (c,o)"
+
+r[16][17] := both_gain_in_closed  # "TA" to "TA TM (c)"    !!!!! 
+r[16][18] := climate_gain_in_open  # "TA" to "TA TM (o)"
+r[16][20] := both_gain_in_closed  # "TA" to "TA BS (c)"
+r[16][24] := climate_gain_in_open  # "TA" to "TA BS (o)"
+
+r[17][19] := function_gain_in_open  # "TA TM (c)" to "TA TM (c,o)"
+r[17][21] := climate_gain_in_closed  # "TA TM (c)" to "TA BS (c) TM (c)"
+r[17][25] := climate_gain_in_open  # "TA TM (c)" to "TA BS (o) TM (c)"
+
+r[18][19] := function_gain_in_closed  # "TA TM (o)" to "TA TM (c,o)"
+r[18][22] := both_gain_in_closed  # "TA TM (o)" to "TA BS (c) TM (o)"
+r[18][26] := climate_gain_in_open  # "TA TM (o)" to "TA BS (o) TM (o)"
+
+r[19][23] := climate_gain_in_closed  # "TA TM (c,o)" to "TA BS (c) TM (c,o)"
+r[19][27] := climate_gain_in_open  # "TA TM (c,o)" to "TA BS (o) TM (c,o)"
+
+r[20][21] := climate_gain_in_open  # "TA BS (c)" to "TA BS (c) TM (c)"
+r[20][22] := climate_gain_in_open  # "TA BS (c)" to "TA BS (c) TM (o)"
+r[20][28] := function_gain_in_open  # "TA BS (c)" to "TA BS (c,o)"
+
+r[21][23] := function_gain_in_open  # "TA BS (c) TM (c)" to "TA BS (c) TM (c,o)"
+r[21][29] := function_gain_in_open  # "TA BS (c) TM (c)" to "TA BS (c,o) TM (c)"
+
+r[22][23] := function_gain_in_closed  # "TA BS (c) TM (o)" to "TA BS (c) TM (c,o)"
+r[22][30] := function_gain_in_open  # "TA BS (c) TM (o)" to "TA BS (c,o) TM (o)"
+
+r[23][31] := function_gain_in_open  # "TA BS (c) TM (c,o)" to "TA BS (c,o) TM (c,o)"
+
+r[24][25] := both_gain_in_closed  # "TA BS (o)" to "TA BS (o) TM (c)"
+r[24][26] := climate_gain_in_open  # "TA BS (o)" to "TA BS (o) TM (o)"
+r[24][28] := function_gain_in_closed  # "TA BS (o)" to "TA BS (c,o)"
+
+r[25][27] := function_gain_in_open  # "TA BS (o) TM (c)" to "TA BS (o) TM (c,o)"
+r[25][29] := function_gain_in_closed  # "TA BS (o) TM (c)" to "TA BS (c,o) TM (c)"
+
+r[26][27] := function_gain_in_closed  # "TA BS (o) TM (o)" to "TA BS (o) TM (c,o)"
+r[26][30] := function_gain_in_closed  # "TA BS (o) TM (o)" to "TA BS (c,o) TM (o)"
+
+r[27][31] := function_gain_in_closed  # "TA BS (o) TM (c,o)" to "TA BS (c,o) TM (c,o)"
+
+r[28][29] := climate_gain_in_closed  # "TA BS (c,o)" to "TA BS (c,o) TM (c)"
+r[28][30] := climate_gain_in_open  # "TA BS (c,o)" to "TA BS (c,o) TM (o)"          !!!!!!!!
+
+r[29][31] := function_gain_in_open  # "TA BS (c,o) TM (c)" to "TA BS (c,o) TM (c,o)"
+
+r[30][31] := function_gain_in_closed  # "TA BS (c,o) TM (o)" to "TA	BS (c,o) TM	(c,o)"
+
+
+## biome contraction ##
+r[3][2] := extinction_rates[1] 
+r[3][1] := extinction_rates[2] 
+r[5][4] := extinction_rates[1] 
+r[5][1] := extinction_rates[4] 
+r[6][4] := extinction_rates[2] 
+r[6][2] := extinction_rates[4] 
+r[7][6] := extinction_rates[1] 
+r[7][5] := extinction_rates[2] 
+r[7][3] := extinction_rates[4] 
+r[9][8] := extinction_rates[1] 
+r[9][1] := extinction_rates[8] 
+r[10][8] := extinction_rates[2] 
+r[10][2] := extinction_rates[8] 
+r[11][10] := extinction_rates[1] 
+r[11][9] := extinction_rates[2] 
+r[11][3] := extinction_rates[8] 
+r[12][8] := extinction_rates[4] 
+r[12][4] := extinction_rates[8] 
+r[13][12] := extinction_rates[1] 
+r[13][9] := extinction_rates[4] 
+r[13][5] := extinction_rates[8] 
+r[14][12] := extinction_rates[2] 
+r[14][10] := extinction_rates[4] 
+r[14][6] := extinction_rates[8] 
+r[15][14] := extinction_rates[1] 
+r[15][13] := extinction_rates[2] 
+r[15][11] := extinction_rates[4] 
+r[15][7] := extinction_rates[8] 
+r[17][16] := extinction_rates[1] 
+r[17][1] := extinction_rates[16] 
+r[18][16] := extinction_rates[2] 
+r[18][2] := extinction_rates[16] 
+r[19][18] := extinction_rates[1] 
+r[19][17] := extinction_rates[2] 
+r[19][3] := extinction_rates[16] 
+r[20][16] := extinction_rates[4] 
+r[20][4] := extinction_rates[16] 
+r[21][20] := extinction_rates[1] 
+r[21][17] := extinction_rates[4] 
+r[21][5] := extinction_rates[16] 
+r[22][20] := extinction_rates[2] 
+r[22][18] := extinction_rates[4] 
+r[22][6] := extinction_rates[16] 
+r[23][22] := extinction_rates[1] 
+r[23][21] := extinction_rates[2] 
+r[23][19] := extinction_rates[4] 
+r[23][7] := extinction_rates[16] 
+r[24][16] := extinction_rates[8] 
+r[24][8] := extinction_rates[16] 
+r[25][24] := extinction_rates[1] 
+r[25][17] := extinction_rates[8] 
+r[25][9] := extinction_rates[16] 
+r[26][24] := extinction_rates[2] 
+r[26][18] := extinction_rates[8] 
+r[26][10] := extinction_rates[16] 
+r[27][26] := extinction_rates[1] 
+r[27][25] := extinction_rates[2] 
+r[27][19] := extinction_rates[8] 
+r[27][11] := extinction_rates[16] 
+r[28][24] := extinction_rates[4] 
+r[28][20] := extinction_rates[8] 
+r[28][12] := extinction_rates[16] 
+r[29][28] := extinction_rates[1] 
+r[29][25] := extinction_rates[4] 
+r[29][21] := extinction_rates[8] 
+r[29][13] := extinction_rates[16] 
+r[30][28] := extinction_rates[2] 
+r[30][26] := extinction_rates[4] 
+r[30][22] := extinction_rates[8] 
+r[30][14] := extinction_rates[16] 
+r[31][30] := extinction_rates[1] 
+r[31][29] := extinction_rates[2] 
+r[31][27] := extinction_rates[4] 
+r[31][23] := extinction_rates[8] 
+r[31][15] := extinction_rates[16]
+

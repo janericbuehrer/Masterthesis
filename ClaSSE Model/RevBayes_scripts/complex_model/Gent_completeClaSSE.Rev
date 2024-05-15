@@ -1,0 +1,367 @@
+##################################################################################
+#
+# RevBayes Analysis: Bayesian inference of diversification rates under a
+#                    cladogenetic character-dependent birth-death model (also
+#                    called Cladogenetic State Speciation and Extinction or
+#                    ClaSSE). In this example we use ClaSSE to model biogeographic
+#                    range evolution similar to the DEC models. Unlike the DEC
+#                    model, ClaSSE accounts for speciation events unobserved due
+#                    to extinction or incomplete sampling.
+#
+# Model:             Incomplete Model, only the three biomes are modelled without
+#                    vegetation formations.
+#
+# Assumptions:       Here I relaxed the assumption that the presence in t and ta but 
+#                    not in bs is impossible,
+#                    (e.g. 7 = 101 = both ta & t).
+#                    Moreover, I stick to the assumption that there are no   
+#                    "global mass extinctions",
+#                    therefore the species must occur in a single biome to go extinct.
+#
+##################################################################################
+
+# load tensor_phylo from the docker's root directory
+loadPlugin("TensorPhylo", "/tensorphylo/build/installer/lib")
+
+
+# FILESYSTEM
+fp          = "/home/buehrerj/gentiana/"
+dat_fp      = fp + "data/"
+out_fp      = fp + "output/completeModel/m2/"
+bg_fn       = dat_fp + "Gent_completeModel_nat.csv"
+phy_fn      = dat_fp + "Gentiana_cor.nex"
+
+
+#######################
+# Reading in the Data #
+#######################
+
+# Get the tree ([1] is there to say that we are only taking the first tree of the file, as the function is assuming that it is a vector of trees)
+observed_phylogeny <- readTrees(phy_fn)[1]
+root_age <- observed_phylogeny.rootAge()
+
+# Get the taxa in the tree. We'll need this later on.
+taxa = observed_phylogeny.taxa()
+
+# Read biogeographic range (biome) data. The areas are represented as the
+# following character states:
+
+#biome definitions:
+# (c) = closed
+# (o) = open
+# TM = temperate/montane
+# BS = boreal/subalpine
+# TA = tundra/alpine
+
+########## character states #############
+# all possible combinations of 5 states
+
+#state | bits | state_describtion #######
+#
+#  0    00001					TM	(c)
+#  1 	00010					TM	(o)
+#  2	00011					TM	(c,o)
+#  3	00100		BS	(c)			
+#  4	00101		BS	(c)		TM	(c)
+#  5	00110		BS	(c)		TM	(o)
+#  6	00111		BS	(c)		TM	(c,o)
+#  7	01000		BS	(o)			
+#  8	01001		BS	(o)		TM	(c)
+#  9	01010		BS	(o)		TM	(o)
+# 10	01011		BS	(o)		TM	(c,o)
+# 11	01100		BS	(c,o)		
+# 12	01101		BS	(c,o)	TM	(c)
+# 13	01110		BS	(c,o)	TM	(o)
+# 14	01111		BS	(c,o)	TM	(c,o)
+# 15	10000	TA				
+# 16	10001	TA				TM	(c)			
+# 17	10010	TA				TM	(o)			
+# 18	10011	TA				TM	(c,o)		
+# 19	10100	TA	BS	(c)			
+# 20	10101	TA	BS	(c)		TM	(c)
+# 21	10110	TA	BS	(c)		TM	(o)
+# 22	10111	TA	BS	(c)		TM	(c,o)
+# 23	11000	TA	BS	(o)		
+# 24	11001	TA	BS	(o)		TM	(c)
+# 25	11010	TA	BS	(o)		TM	(o)
+# 26	11011	TA	BS	(o)		TM	(c,o)
+# 27	11100	TA	BS	(c,o)		
+# 28	11101	TA	BS	(c,o)	TM	(c)
+# 29	11110	TA	BS	(c,o)	TM	(o)
+# 30	11111	TA	BS	(c,o)	TM	(c,o)
+##########################################
+#Read in
+data_biogeo = readCharacterDataDelimited(bg_fn, stateLabels="31", type="NaturalNumbers", delimiter=";", header=TRUE)
+
+print(data_biogeo.taxa())
+
+NUM_states = 31
+NUM_character = 1
+
+# Create some vector for the moves and monitors of this analysis
+moves    = VectorMoves()
+monitors = VectorMonitors()
+
+###############################
+# Set up the extinction rates #
+###############################
+
+# We are going to draw both anagenetic transition rates
+# and diversification rates from a lognormal distribution.
+# The mean of the prior distribution will be the expected net
+# diversification rate, and the SD will be 1.0 so the 95%
+# prior interval ranges well over 2 orders of magnitude.
+num_species <- 341 # approximate total number of Gentiana
+rate_mean <- ln( ln(num_species/2.0) / observed_phylogeny.rootAge() ) 
+rate_sd <- 1.0
+
+# The extinction rates will be stored in a vector where each element represents
+# the extinction rate for the corresponding character state.
+# I chose NOT to allow a lineage to go extinct in multiple biomes
+# at the same time (like a global extinction event). I restrict the
+# model so that a lineage can only go extinct if it's range is limited to one area.
+# As an alternative, one could comment out the last 3 rows.
+#
+
+## initialise all biomes to 0 as most of them are states that represents multiple biome occupation and by my definition not possible for extinction
+
+for (i in 1:31) {
+    extinction_rates[i] <- 0.0
+} 
+
+extinction_rates[1] ~ dnLognormal(rate_mean, rate_sd) # extinction when the lineage is in T(c) 		(state 1)
+extinction_rates[2] ~ dnLognormal(rate_mean, rate_sd) # extinction when the lineage is in T(o) 		(state 2)
+
+extinction_rates[4] ~ dnLognormal(rate_mean, rate_sd) # extinction when the lineage is in BS(c)
+extinction_rates[8] ~ dnLognormal(rate_mean, rate_sd) # extinction when	the lineage is in BS(o)
+
+extinction_rates[16] ~ dnLognormal(rate_mean, rate_sd) # extinction when the lineage is in TA
+
+
+# Note Rev vectors are indexed starting with 1, yet our character states start
+# at 0. So extinction_rate[1] will represent the extinction rate for character
+# state 0.
+
+# add MCMC moves for each extinction rate
+moves.append( mvSlide( extinction_rates[1], weight=1 ) )
+moves.append( mvSlide( extinction_rates[2], weight=1 ) )
+moves.append( mvSlide( extinction_rates[4], weight=1 ) )
+moves.append( mvSlide( extinction_rates[8], weight=1 ) )
+moves.append( mvSlide( extinction_rates[16], weight=1 ) )
+
+
+# Let's also create a deterministic variable to monitor the overall extinction rate
+total_extinction := sum(extinction_rates)
+
+################################################
+# Set up the anagenetic transition rate matrix #
+################################################
+
+# initialize transition matrix:
+
+for (i in 1:31) {
+    for (j in 1:31) {
+        r[i][j] <- 0.0
+    }
+}
+
+# all anagenetic events are stored in anagen_events:
+
+source(fp + "anagen_events.Rev")
+
+# Now we pass our vector of vectors into the fnFreeK function to create
+# the instaneous rate matrix.
+ana_rate_matrix := fnFreeK(r, rescaled=false)
+
+print("anagen matix")
+ana_rate_matrix
+
+
+##################################################
+# Set up the cladogenetic speciation rate matrix #
+##################################################
+
+# Here we need to define each cladogenetic event type in the form
+# [ancestor_state, daughter1_state, daughter2_state]
+# and assign each cladogenetic event type a corresponding
+# speciation rate.
+
+# The first type of cladogenetic event we'll specify is widespread sympatry.
+# Widespread sympatric cladogenesis is where the biogeographic range does
+# not change; that is the daughter lineages inherit the same range as
+# the ancestor. In this example we are not going to allow the change
+# 11 -> 11, 11, as it seems biologically implausible. However if you wanted
+# you could add this to your model.
+
+# We'll set an overall speciation rate for biome copying events (conserving their ancestral biome at speciation) a individual speciation rate:
+
+speciation_conserved ~ dnLognormal(rate_mean, rate_sd)
+
+moves.append( mvSlide( speciation_conserved, weight=1 ) )
+
+speciation_within_biome ~ dnLognormal(rate_mean, rate_sd)
+moves.append( mvSlide( speciation_within_biome, weight=1 ) )
+
+speciation_between_biome ~ dnLognormal(rate_mean, rate_sd)
+moves.append( mvSlide( speciation_between_biome, weight=1 ) )
+
+
+# all cladogenetic events are stored in clado_events:
+source(fp + "cladogen_events.Rev")
+
+for (i in 1:5) {
+    speciation_rates[i] := speciation_conserved/5
+}
+
+for (i in 6:155) {
+    speciation_rates[i] := speciation_within_biome/150
+}
+
+for (i in 156:285) {
+    speciation_rates[i] := speciation_between_biome/130
+}
+
+
+total_speciation := sum(speciation_rates)
+
+# Finally, we construct the cladogenetic speciation rate
+# matrix from the cladogenetic event types and the speciation rates
+clado_matrix := fnCladogeneticSpeciationRateMatrix(clado_events, speciation_rates, 31)
+
+# let's view the cladogenetic matrix to see if we have set it up correctly:
+print("clado_matrix")
+clado_matrix
+
+# As we have specified the model, we did not allow cladogenetic long
+# distance (jump) dispersal, for example 001 -> 001, 010
+
+#########################################################################
+# Set up the cladogenetic character state dependent birth death process #
+#########################################################################
+
+# For simplicity we will fix the root frequences to be equal except for the null state
+# which has probability of 0.
+## root_frequencies <- simplex([0, 1, 1, 1, 1, 1, 1, 1])
+
+## Alternatively, use a Dirichlet distribution as prior for the root state:
+root_frequencies ~ dnDirichlet(rep(1, NUM_states))
+moves.append( mvBetaSimplex(root_frequencies,tune=true,weight=1) )
+moves.append( mvDirichletSimplex(root_frequencies,tune=true,weight=1) )
+
+# rho is the probability of sampling species at the present
+rho <- observed_phylogeny.ntips()/num_species
+
+
+lambda := clado_matrix.getSpeciationRateSumPerState()
+
+print("lambda")
+lambda
+
+omega := clado_matrix.getCladogeneticProbabilityMatrix()
+ 
+
+classe ~ dnGLHBDSP(
+
+   rootAge   = root_age,
+
+   lambda    = lambda,
+
+   mu        = extinction_rates,
+
+   eta       = ana_rate_matrix,
+
+   omega     = omega,
+
+   pi        = root_frequencies,
+
+   condition = "time",
+
+   taxa      = taxa,
+
+   nStates   = NUM_states,
+
+   rho       = rho,
+
+   zeroIndex = true)
+
+
+# clamp the model with the observed data
+classe.clamp( observed_phylogeny )
+classe.clampCharData( data_biogeo )
+
+
+#############
+# The Model #
+#############
+
+# workspace model wrapper
+mymodel = model(classe)
+
+# set up the monitors that will output parameter values to file and screen
+
+monitors.append( mnModel(filename= out_fp + "comp_model.log", printgen=1) )
+
+# MAPS
+monitors.append( mnStochasticCharacterMap(glhbdsp = classe, filename=out_fp +"comp_stoch.log", printgen=1) ) 
+monitors.append( mnStochasticCharacterMap(glhbdsp = classe, filename=out_fp +"comp_stoch_json.log", printgen=1, use_json = true) ) 
+
+# ANC states reconstruction
+monitors.append( mnJointConditionalAncestralState(tree=observed_phylogeny, glhbdsp= classe, 
+    type="NaturalNumbers", printgen=1, withTips=true, withStartStates=true, filename= out_fp +"comp_states.log") )
+
+monitors.append( mnScreen(printgen=500, speciation_conserved, extinction_rates ) )
+
+
+################
+# The Analysis #
+################
+
+# workspace mcmc
+mymcmc = mcmc(mymodel, monitors, moves)
+
+print("mymcmc done")
+
+
+# run the MCMC
+burn_in <- 800
+gen <- 8000
+tuning <- 50
+mymcmc.burnin(generations=burn_in,tuningInterval=tuning)
+mymcmc.run(generations=gen)
+
+
+##############################
+# Summarize ancestral states #
+##############################
+
+f_burn = 0.25 #default
+x_stoch = readAncestralStateTrace(file=out_fp+"comp_stoch.log")
+x_states = readAncestralStateTrace(file=out_fp+"comp_states.log")
+
+
+state_tree = ancestralStateTree(tree=observed_phylogeny, 
+                                ancestral_state_trace_vector=x_states, 
+                                include_start_states=true, 
+                                file= out_fp + "comp_results.tree", 
+                                nStates = NUM_states, 
+                                burnin=f_burn, 
+                                summary_statistic="MAP", 
+                                site=1)
+
+writeNexus(state_tree,filename=out_fp+"state_comp.tre")
+
+
+stoch_tree = characterMapTree(tree = observed_phylogeny, 
+                ancestral_state_trace_vector=x_stoch, 
+                character_file=out_fp + "comp_character.tree", 
+                posterior_file=out_fp+"comp_MAP.tree",
+                shift_prob_file=out_fp+"comp_shift_prob.tree",  
+                reconstruction="marginal")
+
+writeNexus(stoch_tree,filename=out_fp+"stoch_comp.tre")
+
+
+print("DONE")
+
+q()
+

@@ -1,0 +1,311 @@
+################################################
+######## anagenetic speciation events ##########
+################################################
+
+biome_shift_0_2   ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_0_4 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_0_8 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_0_16 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_1_2 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_1_5 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_1_9 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_1_17 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_2_6 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_2_10 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_2_18 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_3_4 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_3_5 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_3_11 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_3_19 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_4_6 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_4_12 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_4_20 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_5_6 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_5_13 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_5_21 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_6_14 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_6_22 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_7_8 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_7_9 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_7_11 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_7_23 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_8_10 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_8_12 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_8_24 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_9_10 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_9_13 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_9_25 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_10_14 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_10_26 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_11_12 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_11_13 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_11_27 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_12_14 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_12_28 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_13_14 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_13_29 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_14_30 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_15_16 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_15_17 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_15_19 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_15_23 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_16_18 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_16_20 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_16_24 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_17_18 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_17_21 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_17_25 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_18_22 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_18_26 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_19_20 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_19_21 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_19_27 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_20_22 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_20_28 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_21_22 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_21_29 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_22_30 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_23_24 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_23_25 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_23_27 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_24_26 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_24_28 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_25_26 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_25_29 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_26_30 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_27_28 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_27_29 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_28_30 ~ dnLognormal(rate_mean, rate_sd)
+biome_shift_29_30 ~ dnLognormal(rate_mean, rate_sd)
+
+moves.append( mvSlide( biome_shift_0_2, weight=1 ))
+moves.append( mvSlide( biome_shift_0_4, weight=1 ))
+moves.append( mvSlide( biome_shift_0_8, weight=1 ))
+moves.append( mvSlide( biome_shift_0_16, weight=1 ))
+moves.append( mvSlide( biome_shift_1_2, weight=1 ))
+moves.append( mvSlide( biome_shift_1_5, weight=1 ))
+moves.append( mvSlide( biome_shift_1_9, weight=1 ))
+moves.append( mvSlide( biome_shift_1_17, weight=1 ))
+moves.append( mvSlide( biome_shift_2_6, weight=1 ))
+moves.append( mvSlide( biome_shift_2_10, weight=1 ))
+moves.append( mvSlide( biome_shift_2_18, weight=1 ))
+moves.append( mvSlide( biome_shift_3_4, weight=1 ))
+moves.append( mvSlide( biome_shift_3_5, weight=1 ))
+moves.append( mvSlide( biome_shift_3_11, weight=1 ))
+moves.append( mvSlide( biome_shift_3_19, weight=1 ))
+moves.append( mvSlide( biome_shift_4_6, weight=1 ))
+moves.append( mvSlide( biome_shift_4_12, weight=1 ))
+moves.append( mvSlide( biome_shift_4_20, weight=1 ))
+moves.append( mvSlide( biome_shift_5_6, weight=1 ))
+moves.append( mvSlide( biome_shift_5_13, weight=1 ))
+moves.append( mvSlide( biome_shift_5_21, weight=1 ))
+moves.append( mvSlide( biome_shift_6_14, weight=1 ))
+moves.append( mvSlide( biome_shift_6_22, weight=1 ))
+moves.append( mvSlide( biome_shift_7_8, weight=1 ))
+moves.append( mvSlide( biome_shift_7_9, weight=1 ))
+moves.append( mvSlide( biome_shift_7_11, weight=1 ))
+moves.append( mvSlide( biome_shift_7_23, weight=1 ))
+moves.append( mvSlide( biome_shift_8_10, weight=1 ))
+moves.append( mvSlide( biome_shift_8_12, weight=1 ))
+moves.append( mvSlide( biome_shift_8_24, weight=1 ))
+moves.append( mvSlide( biome_shift_9_10, weight=1 ))
+moves.append( mvSlide( biome_shift_9_13, weight=1 ))
+moves.append( mvSlide( biome_shift_9_25, weight=1 ))
+moves.append( mvSlide( biome_shift_10_14, weight=1 ))
+moves.append( mvSlide( biome_shift_10_26, weight=1 ))
+moves.append( mvSlide( biome_shift_11_12, weight=1 ))
+moves.append( mvSlide( biome_shift_11_13, weight=1 ))
+moves.append( mvSlide( biome_shift_11_27, weight=1 ))
+moves.append( mvSlide( biome_shift_12_14, weight=1 ))
+moves.append( mvSlide( biome_shift_12_28, weight=1 ))
+moves.append( mvSlide( biome_shift_13_14, weight=1 ))
+moves.append( mvSlide( biome_shift_13_29, weight=1 ))
+moves.append( mvSlide( biome_shift_14_30, weight=1 ))
+moves.append( mvSlide( biome_shift_15_16, weight=1 ))
+moves.append( mvSlide( biome_shift_15_17, weight=1 ))
+moves.append( mvSlide( biome_shift_15_19, weight=1 ))
+moves.append( mvSlide( biome_shift_15_23, weight=1 ))
+moves.append( mvSlide( biome_shift_16_18, weight=1 ))
+moves.append( mvSlide( biome_shift_16_20, weight=1 ))
+moves.append( mvSlide( biome_shift_16_24, weight=1 ))
+moves.append( mvSlide( biome_shift_17_18, weight=1 ))
+moves.append( mvSlide( biome_shift_17_21, weight=1 ))
+moves.append( mvSlide( biome_shift_17_25, weight=1 ))
+moves.append( mvSlide( biome_shift_18_22, weight=1 ))
+moves.append( mvSlide( biome_shift_18_26, weight=1 ))
+moves.append( mvSlide( biome_shift_19_20, weight=1 ))
+moves.append( mvSlide( biome_shift_19_21, weight=1 ))
+moves.append( mvSlide( biome_shift_19_27, weight=1 ))
+moves.append( mvSlide( biome_shift_20_22, weight=1 ))
+moves.append( mvSlide( biome_shift_20_28, weight=1 ))
+moves.append( mvSlide( biome_shift_21_22, weight=1 ))
+moves.append( mvSlide( biome_shift_21_29, weight=1 ))
+moves.append( mvSlide( biome_shift_22_30, weight=1 ))
+moves.append( mvSlide( biome_shift_23_24, weight=1 ))
+moves.append( mvSlide( biome_shift_23_25, weight=1 ))
+moves.append( mvSlide( biome_shift_23_27, weight=1 ))
+moves.append( mvSlide( biome_shift_24_26, weight=1 ))
+moves.append( mvSlide( biome_shift_24_28, weight=1 ))
+moves.append( mvSlide( biome_shift_25_26, weight=1 ))
+moves.append( mvSlide( biome_shift_25_29, weight=1 ))
+moves.append( mvSlide( biome_shift_26_30, weight=1 ))
+moves.append( mvSlide( biome_shift_27_28, weight=1 ))
+moves.append( mvSlide( biome_shift_27_29, weight=1 ))
+moves.append( mvSlide( biome_shift_28_30, weight=1 ))
+moves.append( mvSlide( biome_shift_29_30, weight=1 ))
+
+#### biome shift events #####
+## range expansion ##
+r[1][3] := biome_shift_0_2 
+r[1][5] := biome_shift_0_4 
+r[1][9] := biome_shift_0_8 
+r[1][17] := biome_shift_0_16 
+r[2][3] := biome_shift_1_2 
+r[2][6] := biome_shift_1_5 
+r[2][10] := biome_shift_1_9 
+r[2][18] := biome_shift_1_17 
+r[3][7] := biome_shift_2_6 
+r[3][11] := biome_shift_2_10 
+r[3][19] := biome_shift_2_18 
+r[4][5] := biome_shift_3_4 
+r[4][6] := biome_shift_3_5 
+r[4][12] := biome_shift_3_11 
+r[4][20] := biome_shift_3_19 
+r[5][7] := biome_shift_4_6 
+r[5][13] := biome_shift_4_12 
+r[5][21] := biome_shift_4_20 
+r[6][7] := biome_shift_5_6 
+r[6][14] := biome_shift_5_13 
+r[6][22] := biome_shift_5_21 
+r[7][15] := biome_shift_6_14 
+r[7][23] := biome_shift_6_22 
+r[8][9] := biome_shift_7_8 
+r[8][10] := biome_shift_7_9 
+r[8][12] := biome_shift_7_11 
+r[8][24] := biome_shift_7_23 
+r[9][11] := biome_shift_8_10 
+r[9][13] := biome_shift_8_12 
+r[9][25] := biome_shift_8_24 
+r[10][11] := biome_shift_9_10 
+r[10][14] := biome_shift_9_13 
+r[10][26] := biome_shift_9_25 
+r[11][15] := biome_shift_10_14 
+r[11][27] := biome_shift_10_26 
+r[12][13] := biome_shift_11_12 
+r[12][14] := biome_shift_11_13 
+r[12][28] := biome_shift_11_27 
+r[13][15] := biome_shift_12_14 
+r[13][29] := biome_shift_12_28 
+r[14][15] := biome_shift_13_14 
+r[14][30] := biome_shift_13_29 
+r[15][31] := biome_shift_14_30 
+r[16][17] := biome_shift_15_16 
+r[16][18] := biome_shift_15_17 
+r[16][20] := biome_shift_15_19 
+r[16][24] := biome_shift_15_23 
+r[17][19] := biome_shift_16_18 
+r[17][21] := biome_shift_16_20 
+r[17][25] := biome_shift_16_24 
+r[18][19] := biome_shift_17_18 
+r[18][22] := biome_shift_17_21 
+r[18][26] := biome_shift_17_25 
+r[19][23] := biome_shift_18_22 
+r[19][27] := biome_shift_18_26 
+r[20][21] := biome_shift_19_20 
+r[20][22] := biome_shift_19_21 
+r[20][28] := biome_shift_19_27 
+r[21][23] := biome_shift_20_22 
+r[21][29] := biome_shift_20_28 
+r[22][23] := biome_shift_21_22 
+r[22][30] := biome_shift_21_29 
+r[23][31] := biome_shift_22_30 
+r[24][25] := biome_shift_23_24 
+r[24][26] := biome_shift_23_25 
+r[24][28] := biome_shift_23_27 
+r[25][27] := biome_shift_24_26 
+r[25][29] := biome_shift_24_28 
+r[26][27] := biome_shift_25_26 
+r[26][30] := biome_shift_25_29 
+r[27][31] := biome_shift_26_30 
+r[28][29] := biome_shift_27_28 
+r[28][30] := biome_shift_27_29 
+r[29][31] := biome_shift_28_30 
+r[30][31] := biome_shift_29_30
+
+## biome contraction ##
+r[3][2] := extinction_rates[1] 
+r[3][1] := extinction_rates[2] 
+r[5][4] := extinction_rates[1] 
+r[5][1] := extinction_rates[4] 
+r[6][4] := extinction_rates[2] 
+r[6][2] := extinction_rates[4] 
+r[7][6] := extinction_rates[1] 
+r[7][5] := extinction_rates[2] 
+r[7][3] := extinction_rates[4] 
+r[9][8] := extinction_rates[1] 
+r[9][1] := extinction_rates[8] 
+r[10][8] := extinction_rates[2] 
+r[10][2] := extinction_rates[8] 
+r[11][10] := extinction_rates[1] 
+r[11][9] := extinction_rates[2] 
+r[11][3] := extinction_rates[8] 
+r[12][8] := extinction_rates[4] 
+r[12][4] := extinction_rates[8] 
+r[13][12] := extinction_rates[1] 
+r[13][9] := extinction_rates[4] 
+r[13][5] := extinction_rates[8] 
+r[14][12] := extinction_rates[2] 
+r[14][10] := extinction_rates[4] 
+r[14][6] := extinction_rates[8] 
+r[15][14] := extinction_rates[1] 
+r[15][13] := extinction_rates[2] 
+r[15][11] := extinction_rates[4] 
+r[15][7] := extinction_rates[8] 
+r[17][16] := extinction_rates[1] 
+r[17][1] := extinction_rates[16] 
+r[18][16] := extinction_rates[2] 
+r[18][2] := extinction_rates[16] 
+r[19][18] := extinction_rates[1] 
+r[19][17] := extinction_rates[2] 
+r[19][3] := extinction_rates[16] 
+r[20][16] := extinction_rates[4] 
+r[20][4] := extinction_rates[16] 
+r[21][20] := extinction_rates[1] 
+r[21][17] := extinction_rates[4] 
+r[21][5] := extinction_rates[16] 
+r[22][20] := extinction_rates[2] 
+r[22][18] := extinction_rates[4] 
+r[22][6] := extinction_rates[16] 
+r[23][22] := extinction_rates[1] 
+r[23][21] := extinction_rates[2] 
+r[23][19] := extinction_rates[4] 
+r[23][7] := extinction_rates[16] 
+r[24][16] := extinction_rates[8] 
+r[24][8] := extinction_rates[16] 
+r[25][24] := extinction_rates[1] 
+r[25][17] := extinction_rates[8] 
+r[25][9] := extinction_rates[16] 
+r[26][24] := extinction_rates[2] 
+r[26][18] := extinction_rates[8] 
+r[26][10] := extinction_rates[16] 
+r[27][26] := extinction_rates[1] 
+r[27][25] := extinction_rates[2] 
+r[27][19] := extinction_rates[8] 
+r[27][11] := extinction_rates[16] 
+r[28][24] := extinction_rates[4] 
+r[28][20] := extinction_rates[8] 
+r[28][12] := extinction_rates[16] 
+r[29][28] := extinction_rates[1] 
+r[29][25] := extinction_rates[4] 
+r[29][21] := extinction_rates[8] 
+r[29][13] := extinction_rates[16] 
+r[30][28] := extinction_rates[2] 
+r[30][26] := extinction_rates[4] 
+r[30][22] := extinction_rates[8] 
+r[30][14] := extinction_rates[16] 
+r[31][30] := extinction_rates[1] 
+r[31][29] := extinction_rates[2] 
+r[31][27] := extinction_rates[4] 
+r[31][23] := extinction_rates[8] 
+r[31][15] := extinction_rates[16]
+
