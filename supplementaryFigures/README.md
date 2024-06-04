@@ -1,6 +1,6 @@
 # `Supplementary Figures`
 
-This repository holds all codes for the supplementary figures found in the appendix of my thesis. Note that figure A2 and A3 are part of the anc_reconstruction.R file.
+This repository holds all codes for the supplementary figures found in the appendix of my thesis. Note that figure A2 and A3 are part of the figure_4.2.R file.
 
 Folder alternative approach (Appendix section A.1): The following will guide you through the process of my alternative approach to get events count from the JSON output of RevBayes:
 1. Use the correct_json_output.py to make the output of RevBayes in line with JSON-structure.
