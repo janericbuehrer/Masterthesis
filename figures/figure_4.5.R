@@ -11,8 +11,8 @@ library(ggfun)
 path <- "~/ETH Master/Master Thesis/Gentiana"
 
 # specify the input file
-mod_climbio_file <- "output/Vol2/m8/biome_model_8.log"
-mod_vegf_file <- "output/VegF/m6/model.log"
+mod_climbio_file <- paste0(path, "/output/Vol2/m8/biome_model_8.log")
+mod_vegf_file <- paste0(path, "/output/VegF/m6/model.log")
 
 # read the input file
 trace_climbio <- readTrace(paths = mod_climbio_file)
@@ -22,12 +22,12 @@ trace_vegf <- readTrace(paths = mod_vegf_file)
 trace_vegf <- removeBurnin(trace_vegf, 0.25)
 
 
-## clim bio model ##
+## climate biome model ##
 name_anagen_climbio <- trace_climbio[[1]] %>% select(contains("biome_shift")) %>% colnames
 #name <- name_anagen_climbio[-(grep("4", name_anagen_climbio))] # remove outlier
 #name <- name[-(grep("total_biome_shifts", name))] # remove total_biome_shifts
 #name <- name[c(1,2,3,5,4,6)] # rearrange the order
-name_anagen_climbio_plot <- c("TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "BS & TM to TA", "TA to TM", "TA & TM to BS", "TA & BS to TM")
+name_anagen_climbio_plot <- c("TM to BS", "TM to TA", "BS to TM", "BS to TA", "BS & TM to TA", "TA to TM", "TA to BS", "TA & TM to BS", "TA & BS to TM")
 colnames(trace_climbio[[1]])[5:13] <- name_anagen_climbio_plot
 ## plot
 # color palette used here: paletteer_d("ggthemes::Tableau_20")
@@ -35,7 +35,7 @@ p_conservatism_tm <- plotTrace(trace = trace_climbio, vars = c("speciation_conse
 p_conservatism_bs <- plotTrace(trace = trace_climbio, vars = c("speciation_conserved_bs", "BS to TM", "BS to TA"), color = c("speciation_conserved_bs" = "#4E79A7FF", "BS to TM" = "#F28E2BFF" , "BS to TA" = "#FFBE7DFF"))
 p_conservatism_ta <- plotTrace(trace = trace_climbio, vars = c("speciation_conserved_ta", "TA to BS", "TA to TM"), color = c("speciation_conserved_ta" = "#4E79A7FF", "TA to BS" = "#F1CE63FF" , "TA to TM" = "#B6992DFF"))
 
-## vegf model ##
+## Habitat (vegf) model ##
 name_anagen_vegf_plot <- c("closed to open", "open to closed") # change names
 colnames(trace_vegf[[1]])[c(5, 6)] <- name_anagen_vegf_plot
 ## plot
@@ -105,7 +105,7 @@ p_closed_gg <- p_conservatism_closed[[1]] +
 
 ### customize the plots
 # Function to customize plots
-customize_plot <- function(plot) {
+customize_plot <- function(plot, xlim, ylim = c(0, 16), title = NULL) {
   plot + 
     theme(
       panel.grid.major = element_blank(),
@@ -119,43 +119,41 @@ customize_plot <- function(plot) {
       legend.position = "none",
       legend.key = element_blank()
     ) +
-    labs(title = NULL)
+    labs(title = title)+
+    xlim(xlim) +
+    ylim(ylim)
 }
 
 
 # Customize your existing plots
-p_tm_gg <- customize_plot(p_conservatism_tm[[1]])
-p_bs_gg <- customize_plot(p_conservatism_bs[[1]])
-p_ta_gg <- customize_plot(p_conservatism_ta[[1]])
-p_open_gg <- customize_plot(p_conservatism_open[[1]])
-p_closed_gg <- customize_plot(p_conservatism_closed[[1]])
-legend_plot <- customize_plot(legend_plot)
+p_tm_gg <- customize_plot(p_conservatism_tm[[1]], xlim = c(0, 0.6), title = "TM Biome")
+p_bs_gg <- customize_plot(p_conservatism_bs[[1]], xlim = c(0, 3), title = "BS Biome")
+p_ta_gg <- customize_plot(p_conservatism_ta[[1]], ylim = c(0, 17), xlim = c(0, 0.6), title = "TA Biome")
+p_open_gg <- customize_plot(p_conservatism_open[[1]], xlim = c(0, 0.6), title = "Open Habitats")
+p_closed_gg <- customize_plot(p_conservatism_closed[[1]], xlim = c(0, 3), title = "Closed Habitats")
 
 
-# create a unified legend
-# Dummy plot for creating a unified legend
-# Dummy plot for creating a unified legend with geom_tile
 # Dummy plot for creating a unified legend with geom_tile and custom order
 legend_plot <- ggplot() + 
-  geom_tile(aes(x = 1, y = 1, fill = factor("Biome stasis", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+  geom_tile(aes(x = 1, y = 1, fill = factor("Biome/Habitat stasis", 
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("TM to BS", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("TM to TA", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("BS to TM", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("BS to TA", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("TA to BS", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("TA to TM", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasiss", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("open to closed", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
   geom_tile(aes(x = 1, y = 1, fill = factor("closed to open", 
-                                            levels = c("Biome stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
-  scale_fill_manual(values = c("Biome stasis" = "#4E79A7FF",
+                                            levels = c("Biome/Habitat stasis", "TM to BS", "TM to TA", "BS to TM", "BS to TA", "TA to BS", "TA to TM", "open to closed", "closed to open"))), width = 0.1, height = 0.1) +
+  scale_fill_manual(values = c("Biome/Habitat stasis" = "#4E79A7FF",
                                "TM to BS" = "#59A14F",
                                "TM to TA" = "#8CD17D",
                                "BS to TM" = "#F28E2BFF",
@@ -184,6 +182,6 @@ combined_plot <- grid.arrange(
   nrow = 2 )# Arrange plots in one column 
 
 # Save the arranged plots to a PDF file
-ggsave("traces_columnwise.pdf", combined_plot, width = 15, height = 10)
+ggsave(paste0(path, "/plots/conservatism_hypo/traces_columnwise_normalized_w_title.pdf"), combined_plot, width = 15, height = 10)
 
 
