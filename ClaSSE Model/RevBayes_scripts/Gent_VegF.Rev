@@ -177,10 +177,6 @@ clado_matrix := fnCladogeneticSpeciationRateMatrix(clado_events, speciation_rate
 # let's view the cladogenetic matrix to see if we have set it up correctly:
 clado_matrix
 
-# As we have specified the model, we did not allow cladogenetic long
-# distance (jump) dispersal, for example 001 -> 001, 010
-
-
 #########################################################################
 # Set up the cladogenetic character state dependent birth death process #
 #########################################################################

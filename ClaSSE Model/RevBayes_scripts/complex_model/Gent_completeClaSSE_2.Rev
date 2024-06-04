@@ -122,8 +122,6 @@ rate_sd <- 1.0
 # I chose NOT to allow a lineage to go extinct in multiple biomes
 # at the same time (like a global extinction event). I restrict the
 # model so that a lineage can only go extinct if it's range is limited to one area.
-# As an alternative, one could comment out the last 3 rows.
-#
 
 ## initialise all biomes to 0 as most of them are states that represents multiple biome occupation and by my definition not possible for extinction
 
@@ -188,12 +186,8 @@ ana_rate_matrix
 # and assign each cladogenetic event type a corresponding
 # speciation rate.
 
-# The first type of cladogenetic event we'll specify is widespread sympatry.
-# Widespread sympatric cladogenesis is where the biogeographic range does
-# not change; that is the daughter lineages inherit the same range as
-# the ancestor. In this example we are not going to allow the change
-# 11 -> 11, 11, as it seems biologically implausible. However if you wanted
-# you could add this to your model.
+# In this example we are not going to allow the change
+# 11 -> 11, 11, as it seems biologically implausible.
 
 # We'll set an overall speciation rate for biome copying events (conserving their ancestral biome at speciation) a individual speciation rate:
 
@@ -235,7 +229,7 @@ print("clado_matrix")
 clado_matrix
 
 # As we have specified the model, we did not allow cladogenetic long
-# distance (jump) dispersal, for example 001 -> 001, 010
+# distance (jump) dispersal.
 
 #########################################################################
 # Set up the cladogenetic character state dependent birth death process #
